@@ -11,20 +11,24 @@ const APP_SHELL = [
   'css/style.css',
   'css/GoogleSans-Regular.ttf',
   'img/favicon.ico',
-  'img/avatars/spiderman.jpg',
-  'img/avatars/hulk.jpg',
-  'img/avatars/ironman.jpg',
-  'img/avatars/thor.jpg',
-  'img/avatars/wolverine.jpg',
+  'img/avatars/parrot.gif',
+  'img/avatars/banana.gif',
+  'img/avatars/caca.gif',
   'js/app.js',
+  'js/app/register.js',
+  'js/app/register.html',
+  'js/app/chat.js',
+  'js/app/chat.html',
   'js/sw-utils.js'
 ];
 
 const APP_SHELL_INMUTABLE = [
   'https://fonts.googleapis.com/icon?family=Material+Icons',
-  'https://code.getmdl.io/1.3.0/material.lime-amber.min.css',
+  'https://code.getmdl.io/1.3.0/material.red-blue.min.css',
   'css/animate.css',
-  'js/libs/jquery.js'
+  'js/libs/jquery.js',
+  'js/libs/vue.js',
+  'js/libs/vue-router.js'
 ];
 
 self.addEventListener( 'install', e => {
@@ -56,7 +60,6 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-
   const respuesta = caches.match(e.request).then( res => {
     if (res ) {
       return res;

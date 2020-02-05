@@ -1,19 +1,18 @@
-import Vue from 'vue';
-
 const url = window.location.href;
 const swLocation = '/nss-chat/sw.js';
 
 if (navigator.serviceWorker ) {
-  if ( url.includes('localhost') ) {
-    navigator.serviceWorker.register('/sw.js');
+  console.log(url);
+  if ( url.includes('127.0.0.1') ) {
+    console.log('Entro!!!!');
+    navigator.serviceWorker.register('http://127.0.0.1:8080/sw.js');
+  } else {
+    navigator.serviceWorker.register(swLocation);
   }
-
-  navigator.serviceWorker.register(swLocation);
-
 }
 
-import Register from "app/register.js";
-import Chat from "app/chat.js";
+import Register from "./app/register.js";
+import Chat from "./app/chat.js";
 
 // Inicialización de Rutas
 const routes = [
