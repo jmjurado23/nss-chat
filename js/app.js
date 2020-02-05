@@ -1,23 +1,24 @@
+'use strict';
+
 const url = window.location.href;
 const swLocation = '/nss-chat/sw.js';
 
 if (navigator.serviceWorker ) {
-  console.log(url);
-  if ( url.includes('127.0.0.1') ) {
-    console.log('Entro!!!!');
-    navigator.serviceWorker.register('http://127.0.0.1:8080/sw.js');
+  if ( url.includes('localhost') ) {
+    navigator.serviceWorker.register('/sw.js');
   } else {
     navigator.serviceWorker.register(swLocation);
   }
 }
 
-import Register from "./app/register.js";
-import Chat from "./app/chat.js";
+// Cargando componentes con vue loader
+const Register = httpVueLoader("./js/app/register.vue");
+const Chat = httpVueLoader("./js/app/chat.vue");
 
 // Inicialización de Rutas
 const routes = [
-    { path: '/', component: Register },
-    { path: '/chat', component: Chat }
+    { path: '/', component: Register, name: 'register'},
+    { path: '/chat', component: Chat, name: 'chat' }
   ]
 
 const router = new VueRouter({

@@ -7,19 +7,17 @@ const INMUTABLE_CACHE = 'inmutable-v1';
 
 const APP_SHELL = [
   //'/',
-  'index.html',
-  'css/style.css',
-  'css/GoogleSans-Regular.ttf',
-  'img/favicon.ico',
-  'img/avatars/parrot.gif',
-  'img/avatars/banana.gif',
-  'img/avatars/caca.gif',
-  'js/app.js',
-  'js/app/register.js',
-  'js/app/register.html',
-  'js/app/chat.js',
-  'js/app/chat.html',
-  'js/sw-utils.js'
+  '/index.html',
+  '/css/style.css',
+  '/css/GoogleSans-Regular.ttf',
+  '/img/favicon.ico',
+  '/img/avatars/parrot.gif',
+  '/img/avatars/banana.gif',
+  '/img/avatars/poop.gif',
+  '/js/app.js',
+  '/js/app/register.vue',
+  '/js/app/chat.vue',
+  '/js/sw-utils.js'
 ];
 
 const APP_SHELL_INMUTABLE = [
@@ -28,7 +26,8 @@ const APP_SHELL_INMUTABLE = [
   'css/animate.css',
   'js/libs/jquery.js',
   'js/libs/vue.js',
-  'js/libs/vue-router.js'
+  'js/libs/vue-router.js',
+  'js/libs/vue-loader.js'
 ];
 
 self.addEventListener( 'install', e => {
@@ -42,6 +41,8 @@ self.addEventListener( 'install', e => {
   );
 
   e.waitUntil(Promise.all([cacheStatic, cacheInmutable]));
+
+  console.log("Service Worker instalado con éxito!! :)");
 });
 
 self.addEventListener('activate', e => {
@@ -57,6 +58,7 @@ self.addEventListener('activate', e => {
 
     });
   });
+  console.log("Service Worker activado con éxito!! :)");
 });
 
 self.addEventListener('fetch', e => {
