@@ -28,3 +28,27 @@ const router = new VueRouter({
 const app = new Vue({
     router
 }).$mount('#app')
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  window.addEventListener('online', e => {
+    handlerMessage(e);
+  });
+
+
+  window.addEventListener('offline', e => {
+    var snackbarContainer = document.querySelector('#no-connection-snackbar');
+    var data = {
+      message: 'Se ha perdido la conexión',
+      timeout: 10000,
+      actionHandler: handlerMessage,
+      actionText: 'Cerrar'
+    };
+    snackbarContainer.MaterialSnackbar.showSnackbar(data);
+  });
+
+  var handlerMessage = function(event) {
+    var snackbarContainer = document.querySelector('#no-connection-snackbar');
+    snackbarContainer.MaterialSnackbar.cleanup_();
+  };
+});

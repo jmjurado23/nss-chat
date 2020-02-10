@@ -27,7 +27,8 @@ const APP_SHELL_INMUTABLE = [
   'js/libs/jquery.js',
   'js/libs/vue.js',
   'js/libs/vue-router.js',
-  'js/libs/vue-loader.js'
+  'js/libs/vue-loader.js',
+  'js/libs/material.min.js'
 ];
 
 self.addEventListener( 'install', e => {
