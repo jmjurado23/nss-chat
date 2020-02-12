@@ -2,7 +2,7 @@
   <div id="register-page">
     <div id="header-register">
       
-      <img src="/img/icons/android-icon-96x96.png"/>
+      <img src="./img/icons/android-icon-96x96.png"/>
       <h2 class="center">
         NSS Chat
       </h2>
