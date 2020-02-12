@@ -40,8 +40,8 @@
       <div class="modal-content">
         <span class="close" @click="closeModal">&times;</span>
         <p>Selecciona tu avatar:</p>
-        <div class="img-modal" v-for="img in images" v-bind:key="img">
-          <img :src="urlForImage(img)" @click="selectImg(img)">
+        <div class="img-modal" v-for="img in images" v-bind:key="img" @click="selectImg(img)">
+          <img :src="urlForImage(img)">
         </div>
       </div>
     </div>
@@ -65,13 +65,13 @@ module.exports = {
   },
   methods: {
     getUrlImage() {
-      return '../img/avatars/' + this.image;
+      return './img/avatars/' + this.image;
     },
     showModal() {
       this.modal = true;
     },
     urlForImage(img) {
-      return '../img/avatars/' + img;
+      return './img/avatars/' + img;
     },
     selectImg(img) {
       this.image = img;
