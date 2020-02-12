@@ -21,16 +21,20 @@
             <img :src="getUrlImage()" alt="Avatar" sty>
           </div>
           <form action="#">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="name">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+              v-bind:class="{ 'is-invalid': noName }">
+              <input class="mdl-textfield__input" type="text" id="name" v-model="name" maxlength="20">
               <label class="mdl-textfield__label" for="name">Nombre</label>
+              <span class="mdl-textfield__error">Debes introducir un nombre</span>
             </div>
           </form>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+          <br>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" @click="enter">
             Entrar
           </button>
         </div>
       </div>
+      <br>
     </div>
 
     <!-- The Modal -->
@@ -56,12 +60,18 @@ module.exports = {
     return {
       image: 'banana.gif',
       images: ['banana.gif', 'parrot.gif', 'poop.gif'],
-      modal: false
+      modal: false,
+      name: '',
+      noName: false
     }
   },
   computed: {
   },
   created() {
+    setTimeout( function(){
+      componentHandler.upgradeAllRegistered();
+    }, 100);
+    this.checkSession();
   },
   methods: {
     getUrlImage() {
@@ -79,6 +89,26 @@ module.exports = {
     },
     closeModal() {
       this.modal = false;
+    },
+    enter() {
+      this.noName = false;
+      if (this.name) {
+        const user = {
+          name: this.name,
+          image: this.image
+        };
+
+        localStorage.setItem('nss-chat-user', JSON.stringify(user)); 
+        this.$router.push({ name: 'chat' });
+      } else {
+        this.noName = true;
+      }
+    },
+    checkSession() {
+      var user = JSON.parse(localStorage.getItem('nss-chat-user'));
+      if (user !== null) {
+        this.$router.push({ name: 'chat' })
+      }
     }
   }
 }
