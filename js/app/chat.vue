@@ -20,11 +20,32 @@
       <!-- Messages -->
       <div class="content">
         <div class="message-wrapper" v-for="(mes, i) in messages" v-bind:key="`${i}`">
-            <div class="circle-wrapper">
+            <!-- My messages -->
+            <div class="text-wrapper me" v-if="user && mes.user_name == user.name">
+              <div class="text-header">
+                {{'Tú - ' + mes.date}}
+              </div>
+              <div class="text-content">
+                {{mes.data}}
+              </div>
+            </div>
+            <div class="circle-wrapper me"
+              v-if="user && mes.user_name == user.name">
               <img :src="urlForImage(mes.user_avatar)">
             </div>
-            <div class="text-wrapper">
-              {{mes.data}}
+
+            <!-- Their messages -->
+            <div class="circle-wrapper"
+              v-if="user && mes.user_name != user.name">
+              <img :src="urlForImage(mes.user_avatar)">
+            </div>
+            <div class="text-wrapper" v-if="user && mes.user_name != user.name">
+              <div class="text-header">
+                {{mes.user_name + ' - ' + mes.date}}
+              </div>
+              <div class="text-content">
+                {{mes.data}}
+              </div>
             </div>
         </div>
       </div>
@@ -38,7 +59,7 @@
           </div>
         </div>
         <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
-          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" @click="sendMessage">
             <i class="material-icons">send</i>
           </button>
         </div>
@@ -82,8 +103,16 @@ module.exports = {
             date: '23/11/1989 23:10'
           }
         )
+        this.messages.push(
+          {
+            type: 'text',
+            data: 'Hola este es el mensaje de prueba 1',
+            user_name: 'juan',
+            user_avatar: 'banana.gif',
+            date: '23/11/1989 23:10'
+          }
+        )
       }
-      console.log(this.messages);
     },
     checkSession() {
       const user = JSON.parse(localStorage.getItem('nss-chat-user'));
@@ -138,7 +167,7 @@ module.exports = {
   .mdl-mini-footer {
     padding: 0px !important;
     height: 90px;
-    background-color: #d1d0d0 !important;
+    background-color: #e9e6e7 !important;
   }
   .mdl-grid {
     padding: 3px;
@@ -160,11 +189,15 @@ module.exports = {
     float: left;
     background-color: #ffd4d0;
   }
+
+  .message-wrapper .circle-wrapper.me img{
+    background-color: #c8ffcd;
+  }
   
   .message-wrapper .text-wrapper {
     padding: 8px;
     min-height: 8px;
-    width: 60%;
+    width: 80%;
     margin: 0 8px;
     box-shadow: 0px 1px 0px 0px rgba(50, 50, 50, 0.3);
     border-radius: 2px;
@@ -172,5 +205,12 @@ module.exports = {
     position: relative;
     background-color: #ffd4d0;
     color: #2f2f2f;
+  }
+  .message-wrapper .text-wrapper.me{
+    background-color: #c8ffcd;
+  }
+  .text-header {
+    color: #840827;
+    font-size: smaller;
   }
 </style>
