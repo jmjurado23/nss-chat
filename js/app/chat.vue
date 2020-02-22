@@ -19,9 +19,9 @@
     <div class="inner" id="message-content" >
       <!-- Messages -->
       <div class="content">
-        <div class="message-wrapper" v-for="(mes, i) in messages" v-bind:key="`${i}`">
+        <div class="message-wrapper" v-for="(mes, i) in orderedMessages" v-bind:key="`${i}`">
             <!-- My messages -->
-            <div class="text-wrapper me" v-if="user && mes.user_name == user.name">
+            <div class="text-wrapper me" v-if="user && mes.session_id == user.session_id">
               <div class="text-header">
                 {{'Tú - ' + mes.date}}
               </div>
@@ -30,16 +30,16 @@
               </div>
             </div>
             <div class="circle-wrapper me"
-              v-if="user && mes.user_name == user.name">
+              v-if="user && mes.session_id == user.session_id">
               <img :src="urlForImage(mes.user_avatar)">
             </div>
 
             <!-- Their messages -->
             <div class="circle-wrapper"
-              v-if="user && mes.user_name != user.name">
+              v-if="user && mes.session_id != user.session_id">
               <img :src="urlForImage(mes.user_avatar)">
             </div>
-            <div class="text-wrapper" v-if="user && mes.user_name != user.name">
+            <div class="text-wrapper" v-if="user && mes.session_id != user.session_id">
               <div class="text-header">
                 {{mes.user_name + ' - ' + mes.date}}
               </div>
@@ -88,6 +88,13 @@ module.exports = {
     this.checkSession();
     this.getMessages();
   },
+  computed: {
+    orderedMessages() {
+      return this.messages.sort((a,b) => {
+        return ((a.code > b.code) ? 1 : ((b.code > a.code) ? -1 : 0));
+      });
+    }
+  },
   methods: {
     getMessages() {
       const url = window.url_server + '/messages/';
@@ -115,6 +122,7 @@ module.exports = {
         this.$router.push({ name: 'register' })
       } else {
         this.user = user;
+        console.log(this.user);
       }
     },
     exit() {
@@ -124,7 +132,6 @@ module.exports = {
     },
     getName() {
       if (this.user !== undefined) {
-        console.log(this.user);
         return this.user.name;
       }
     },
