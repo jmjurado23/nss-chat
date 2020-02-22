@@ -73,13 +73,6 @@ module.exports = {
     }, 100);
     this.checkSession();
     let deferredPrompt;
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      // Stash the event so it can be triggered later.
-      e.preventDefault();
-      deferredPrompt = e;
-      showInstallPromotion();
-    });
   },
   methods: {
     getUrlImage() {
