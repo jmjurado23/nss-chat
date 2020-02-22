@@ -27,6 +27,12 @@
               <label class="mdl-textfield__label" for="name">Nombre</label>
               <span class="mdl-textfield__error">Debes introducir un nombre</span>
             </div>
+            </br>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="server" v-model="server">
+              <label class="mdl-textfield__label" for="server">url servidor</label>
+            </div>
           </form>
           <br>
           <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" @click="enter">
@@ -62,7 +68,8 @@ module.exports = {
       images: ['banana.gif', 'parrot.gif', 'poop.gif'],
       modal: false,
       name: '',
-      noName: false
+      noName: false,
+      server: ''
     }
   },
   computed: {
@@ -94,7 +101,7 @@ module.exports = {
     enter() {
       this.noName = false;
       if (this.name) {
-        const url = window.url_server + '/sessions';
+        const url = this.server + '/sessions';
         const user = {
             session: {
               user_name: this.name,
@@ -120,8 +127,12 @@ module.exports = {
             session_id: response.id,
             session_code: response.code
           };
+          const server = {
+            server: this.server
+          }
 
-          localStorage.setItem('nss-chat-user', JSON.stringify(user)); 
+          localStorage.setItem('nss-chat-user', JSON.stringify(user));
+          localStorage.setItem('nss-chat-server', JSON.stringify(server)); 
           this.$router.push({ name: 'chat' });
         })
         .catch(error => {console.log(error)});

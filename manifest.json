@@ -6,6 +6,7 @@
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#df2743",
+  "start_url": "index.html",
   "icons": [
     {
      "src": "img/icons/android-icon-36x36.png",

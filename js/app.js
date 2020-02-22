@@ -2,7 +2,6 @@
 
 const url = window.location.href;
 const swLocation = '/nss-chat/sw.js';
-window.url_server = 'http://localhost:3000';
 
 if (navigator.serviceWorker ) {
   if ( url.includes('localhost') ) {

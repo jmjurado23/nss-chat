@@ -74,6 +74,7 @@ module.exports = {
     const vm = this;
     return {
       user: undefined,
+      server: '',
       message: '',
       messages: [
       ]
@@ -97,7 +98,7 @@ module.exports = {
   },
   methods: {
     getMessages() {
-      const url = window.url_server + '/messages/';
+      const url = this.server + '/messages/';
       const otherParams = {
         headers: {
           "Content-Type": "application/json",
@@ -123,7 +124,13 @@ module.exports = {
         this.$router.push({ name: 'register' })
       } else {
         this.user = user;
-        console.log(this.user);
+      }
+
+      const server = JSON.parse(localStorage.getItem('nss-chat-server'));
+      if (server === null) {
+        this.$router.push({ name: 'register' })
+      } else {
+        this.server = server.server;
       }
     },
     exit() {
@@ -150,7 +157,7 @@ module.exports = {
       return './img/avatars/' + img;
     },
     sendMessage() {
-      const url = window.url_server + '/messages/';
+      const url = this.server + '/messages/';
       const message = {
         message: {
           user_avatar: this.user.image,
