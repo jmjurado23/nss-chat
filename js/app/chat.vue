@@ -26,7 +26,7 @@
                 {{'Tú - ' + mes.date}}
               </div>
               <div class="text-content">
-                {{mes.data}}
+                {{mes.message}}
               </div>
             </div>
             <div class="circle-wrapper me"
@@ -44,7 +44,7 @@
                 {{mes.user_name + ' - ' + mes.date}}
               </div>
               <div class="text-content">
-                {{mes.data}}
+                {{mes.message}}
               </div>
             </div>
         </div>
@@ -86,33 +86,28 @@ module.exports = {
       vm.modifyHeight();
     }, 100);
     this.checkSession();
-    this.testMessages();
-  },
-  mounted() {
-    
+    this.getMessages();
   },
   methods: {
-    testMessages() {
-      for(var i = 0; i < 20; i++) {
-        this.messages.push(
-          {
-            type: 'text',
-            data: 'Hola este es el mensaje de prueba 1',
-            user_name: 'antonio',
-            user_avatar: 'poop.gif',
-            date: '23/11/1989 23:10'
-          }
-        )
-        this.messages.push(
-          {
-            type: 'text',
-            data: 'Hola este es el mensaje de prueba 1',
-            user_name: 'juan',
-            user_avatar: 'banana.gif',
-            date: '23/11/1989 23:10'
-          }
-        )
-      }
+    getMessages() {
+      const url = window.url_server + '/messages/';
+      const otherParams = {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST, PUT, DELETE, GET, OPTIONS",
+          "Access-Control-Request-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+        },
+        method: 'GET'
+      };
+
+      fetch(url, otherParams).then(res => res.json())
+      .then(response => {
+        this.messages = response;
+      })
+      .catch(error => {
+        console.log(error);
+      });
     },
     checkSession() {
       const user = JSON.parse(localStorage.getItem('nss-chat-user'));
@@ -123,6 +118,7 @@ module.exports = {
       }
     },
     exit() {
+      //Not remove session from server
       localStorage.setItem('nss-chat-user', null);
       this.$router.push({ name: 'register' });
     },
@@ -145,6 +141,37 @@ module.exports = {
     urlForImage(img) {
       return './img/avatars/' + img;
     },
+    sendMessage() {
+      const url = window.url_server + '/messages/';
+      const message = {
+        message: {
+          user_avatar: this.user.image,
+          user_name: this.user.name,
+          session_id: this.user.session_id,
+          message: this.message,
+          type: 'text'
+        }
+      }
+      const otherParams = {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST, PUT, DELETE, GET, OPTIONS",
+          "Access-Control-Request-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+        },
+        method: 'POST',
+        body: JSON.stringify(message)
+      };
+
+      fetch(url, otherParams).then(res => res.json())
+      .then(response => {
+        this.message = '';
+        this.messages.push(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    }
   }
 }
 </script>

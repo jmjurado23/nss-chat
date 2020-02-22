@@ -93,13 +93,37 @@ module.exports = {
     enter() {
       this.noName = false;
       if (this.name) {
+        const url = window.url_server + '/sessions';
         const user = {
-          name: this.name,
-          image: this.image
+            session: {
+              user_name: this.name,
+              user_avatar: this.image
+            }
+        };
+        const otherParams = {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST, PUT, DELETE, GET, OPTIONS",
+            "Access-Control-Request-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+          },
+          body: JSON.stringify(user),
+          method: 'POST'
         };
 
-        localStorage.setItem('nss-chat-user', JSON.stringify(user)); 
-        this.$router.push({ name: 'chat' });
+        fetch(url, otherParams).then(res => res.json())
+        .then(response => {
+          const user = {
+            name: this.name,
+            image: this.image,
+            session_id: response.id,
+            session_code: response.code
+          };
+
+          localStorage.setItem('nss-chat-user', JSON.stringify(user)); 
+          this.$router.push({ name: 'chat' });
+        })
+        .catch(error => {console.log(error)});
       } else {
         this.noName = true;
       }
