@@ -3,12 +3,12 @@
     <div id="header-register">
       
       <img src="./img/icons/android-icon-96x96.png"/>
-      <h2 class="center">
+      <h3 class="center">
         NSS Chat
-      </h2>
-      <h4 class="center">
+      </h3>
+      <h5 class="center">
         ¡Bienvenido!
-      </h4>
+      </h5>
     </div>
 
     <div id="register-form">
@@ -141,8 +141,8 @@ module.exports = {
 
 <style>
   #header-register {
-    margin: 24px;
-    margin-top: 64px;
+    margin: 18px;
+    margin-top: 40px;
     text-align: center;
   }
 

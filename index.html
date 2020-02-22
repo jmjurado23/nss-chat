@@ -45,15 +45,17 @@
 
   <body >
     <div id="app">
-      <!-- <router-link :to="{ name: 'register'}">Register</router-link>
-      <router-link :to="{ name: 'chat'}">Chat</router-link> -->
-      
-
       <div id="no-connection-snackbar" class="mdl-js-snackbar mdl-snackbar">
         <div class="mdl-snackbar__text"></div>
         <button class="mdl-snackbar__action" type="button"></button>
       </div>
       <router-view></router-view>
+    </div>
+    <div id="box" style="display: none; background-color: white; padding: 8px;">
+      <img src='img/favicon.ico'>
+      <a id="add-button" style="color: rgb(0, 149, 255);">
+        &nbsp; Instalar en Home screen
+      </button>
     </div>
     
     <script type="module" src="js/app.js"></script>
