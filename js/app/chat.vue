@@ -111,6 +111,7 @@ module.exports = {
       fetch(url, otherParams).then(res => res.json())
       .then(response => {
         this.messages = response;
+        this.scrollBottom();
       })
       .catch(error => {
         console.log(error);
@@ -174,10 +175,17 @@ module.exports = {
       .then(response => {
         this.message = '';
         this.messages.push(response);
+        this.scrollBottom();
       })
       .catch(error => {
         console.log(error);
       });
+    },
+    scrollBottom() {
+      setTimeout(() => {
+        var objDiv = document.getElementById("message-content");
+        objDiv.scrollTop = objDiv.scrollHeight;
+      }, 200);
     }
   }
 }
