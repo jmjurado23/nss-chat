@@ -23,7 +23,7 @@ const APP_SHELL = [
 const APP_SHELL_INMUTABLE = [
   'https://fonts.googleapis.com/icon?family=Material+Icons',
   'https://code.getmdl.io/1.3.0/material.pink-light_green.min.css',
-  'css/animate.css',
+  '/css/animate.css',
   '/js/libs/jquery.js',
   '/js/libs/vue.js',
   '/js/libs/vue-router.js',
