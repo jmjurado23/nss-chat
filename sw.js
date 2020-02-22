@@ -1,34 +1,34 @@
 // Imports
-importScripts('/js/sw-utils.js');
+importScripts('js/sw-utils.js');
 
 const STATIC_CACHE = 'static-v1';
 const DYNAMIC_CACHE = 'dynamic-v1';
 const INMUTABLE_CACHE = 'inmutable-v1';
 
 const APP_SHELL = [
-  '/',
-  '/index.html',
-  '/css/style.css',
-  '/css/GoogleSans-Regular.ttf',
-  '/img/favicon.ico',
-  '/img/avatars/parrot.gif',
-  '/img/avatars/banana.gif',
-  '/img/avatars/poop.gif',
-  '/js/app.js',
-  '/js/app/register.vue',
-  '/js/app/chat.vue',
-  '/js/sw-utils.js'
+  //'/',
+  'index.html',
+  'css/style.css',
+  'css/GoogleSans-Regular.ttf',
+  'img/favicon.ico',
+  'img/avatars/parrot.gif',
+  'img/avatars/banana.gif',
+  'img/avatars/poop.gif',
+  'js/app.js',
+  'js/app/register.vue',
+  'js/app/chat.vue',
+  'js/sw-utils.js'
 ];
 
 const APP_SHELL_INMUTABLE = [
   'https://fonts.googleapis.com/icon?family=Material+Icons',
   'https://code.getmdl.io/1.3.0/material.pink-light_green.min.css',
-  '/css/animate.css',
-  '/js/libs/jquery.js',
-  '/js/libs/vue.js',
-  '/js/libs/vue-router.js',
-  '/js/libs/vue-loader.js',
-  '/js/libs/material.min.js'
+  'css/animate.css',
+  'js/libs/jquery.js',
+  'js/libs/vue.js',
+  'js/libs/vue-router.js',
+  'js/libs/vue-loader.js',
+  'js/libs/material.min.js'
 ];
 
 self.addEventListener( 'install', e => {
