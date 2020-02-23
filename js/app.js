@@ -47,6 +47,7 @@ var handlerMessage = function(event) {
 
 window.onload = (e) => { 
   let deferredPrompt;
+  notifications();
   window.addEventListener('beforeinstallprompt', (e) => {
     // Prevent Chrome 67 and earlier from automatically showing the prompt
     e.preventDefault();
@@ -72,5 +73,22 @@ window.onload = (e) => {
         });
     });
   });
+}
 
+//Notifications
+function notifications() {
+  if (!window.Notification) {
+    console.log('This navigator not support notifications');
+    return;
+  }
+
+  if ( Notification.permission === 'granted') {
+    return;
+  } else if (Notification.permission !== 'denied' || Notification.permission === 'default') {
+    Notification.requestPermission((permission) => {
+      if (permission === 'granted') {
+        
+      }
+    });
+  }
 }

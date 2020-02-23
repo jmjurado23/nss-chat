@@ -63,15 +63,22 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  const respuesta = caches.match(e.request).then( res => {
-    if (res ) {
-      return res;
-    } else {
-      // Si el archivo no está en caché, se recupera de internet
-      return fetch(e.request).then( newRes => {
-        return actualizaCacheDinamico(DYNAMIC_CACHE, e.request, newRes);
-      });
-    }
-  });
+
+  let respuesta;
+
+  if ( e.request.url.includes('/message') || e.request.url.includes('/session') ) {
+      respuesta = fetch(e.request);
+  } else {
+    respuesta = caches.match(e.request).then( res => {
+      if (res ) {
+        return res;
+      } else {
+        // Si el archivo no está en caché, se recupera de internet
+        return fetch(e.request).then( newRes => {
+          return actualizaCacheDinamico(DYNAMIC_CACHE, e.request, newRes);
+        });
+      }
+    });
+  }
   e.respondWith( respuesta );
 });

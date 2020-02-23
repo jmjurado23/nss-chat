@@ -132,7 +132,8 @@ module.exports = {
           }
 
           localStorage.setItem('nss-chat-user', JSON.stringify(user));
-          localStorage.setItem('nss-chat-server', JSON.stringify(server)); 
+          localStorage.setItem('nss-chat-server', JSON.stringify(server));
+          this.newNotification();
           this.$router.push({ name: 'chat' });
         })
         .catch(error => {console.log(error)});
@@ -145,6 +146,14 @@ module.exports = {
       if (user !== null) {
         this.$router.push({ name: 'chat' })
       }
+    },
+    newNotification() {
+      const opt = {
+        body: `${this.name} bienvenido a NSS chat!!`,
+        icon: 'img/icons/android-icon-72x72.png'
+      }
+
+      const n = new Notification('Bienvenida', opt);
     }
   }
 }

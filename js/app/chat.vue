@@ -77,7 +77,8 @@ module.exports = {
       server: '',
       message: '',
       messages: [
-      ]
+      ],
+      intervalMessage: undefined
     }
   },
   created() {
@@ -85,9 +86,10 @@ module.exports = {
     setTimeout( function(){
       componentHandler.upgradeAllRegistered();
       vm.modifyHeight();
-    }, 100);
+    }, 200);
     this.checkSession();
     this.getMessages();
+    this.intervalMessage = setInterval(this.getMessages, 3000);
   },
   computed: {
     orderedMessages() {
@@ -95,6 +97,9 @@ module.exports = {
         return ((a.code > b.code) ? 1 : ((b.code > a.code) ? -1 : 0));
       });
     }
+  },
+  destroyed() {
+    clearInterval(this.intervalMessage);
   },
   methods: {
     getMessages() {
