@@ -1,7 +1,7 @@
 {
   "short_name": "NSS Chat",
   "name": "Chat para NSS",
-  "start_url": "index.html",
+  "start_url": "/",
   "background_color": "#df2743",
   "display": "standalone",
   "orientation": "portrait",
