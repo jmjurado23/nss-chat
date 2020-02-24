@@ -11,14 +11,31 @@
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation. We hide it in small screens. -->
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" @click="exit()">Cerrar</a>
+          <a class="mdl-navigation__link" @click="exit()">Salir</a>
         </nav>
       </div>
       </header>
+      <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">&nbsp;</span>
+       <span class="mdl-layout-title img">
+         <img :src="urlForImage(user.image)">
+       </span>
+       <span class="mdl-layout-title">
+         {{user.name}}
+       </span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" @click="exit()">Salir</a>
+      </nav>
+    </div>
     </div>
     <div class="inner" id="message-content" >
       <!-- Messages -->
       <div class="content">
+        <div class="no-messages" v-if="messages.length === 0">
+            <h4>
+              No hay mensajes
+            </h4>
+        </div>
         <div class="message-wrapper" v-for="(mes, i) in orderedMessages" v-bind:key="`${i}`">
             <!-- My messages -->
             <div class="text-wrapper me" v-if="user && mes.session_id == user.session_id">
@@ -204,6 +221,9 @@ module.exports = {
 </script>
 
 <style>
+  .no-messages {
+    text-align: center;
+  }
   .inner {
     overflow: scroll;
     height: 520px;
@@ -266,5 +286,15 @@ module.exports = {
   .text-header {
     color: #840827;
     font-size: smaller;
+  }
+  .demo-layout-transparent .mdl-layout__header,
+  .demo-layout-transparent .mdl-layout__drawer-button {
+    color: white;
+  }
+  .mdl-layout-title img{
+    max-width: 128px;
+  }
+  .mdl-layout__drawer {
+    background-color: #eff1f2;
   }
 </style>

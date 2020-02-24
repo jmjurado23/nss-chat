@@ -27,8 +27,7 @@
               <label class="mdl-textfield__label" for="name">Nombre</label>
               <span class="mdl-textfield__error">Debes introducir un nombre</span>
             </div>
-            </br>
-
+            <br>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
               <input class="mdl-textfield__input" type="text" id="server" v-model="server">
               <label class="mdl-textfield__label" for="server">url servidor</label>
@@ -205,6 +204,7 @@ module.exports = {
     border: 2px solid red;
     border-radius: 5px;
     text-align: center;
+    width: 130px;
   }
   .img-modal img{
     max-height: 120px;
