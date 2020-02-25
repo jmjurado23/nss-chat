@@ -103,7 +103,7 @@ module.exports = {
     setTimeout( function(){
       componentHandler.upgradeAllRegistered();
       vm.modifyHeight();
-    }, 200);
+    }, 400);
     this.checkSession();
     this.getMessages();
     this.intervalMessage = setInterval(this.getMessages, 3000);
