@@ -151,8 +151,9 @@ module.exports = {
         body: `${this.name} bienvenido a NSS chat!!`,
         icon: 'img/icons/android-icon-72x72.png'
       }
-
-      ServiceWorkerRegistration.showNotification('Bienvenida', opt);
+      navigator.serviceWorker.ready.then(function(registration) {
+        registration.showNotification('Bienvenida', opt);
+      });
     }
   }
 }

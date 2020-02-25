@@ -17,12 +17,15 @@ const APP_SHELL = [
   'js/app.js',
   'js/app/register.vue',
   'js/app/chat.vue',
-  'js/sw-utils.js'
+  'js/sw-utils.js',
+  'img/icons/android-icon-96x96.png',
+  'img/icons/android-icon-72x72.png'
 ];
 
 const APP_SHELL_INMUTABLE = [
   'https://fonts.googleapis.com/icon?family=Material+Icons',
   'https://code.getmdl.io/1.3.0/material.pink-light_green.min.css',
+  'https://fonts.gstatic.com/s/materialicons/v50/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2',
   'css/animate.css',
   'js/libs/jquery.js',
   'js/libs/vue.js',
