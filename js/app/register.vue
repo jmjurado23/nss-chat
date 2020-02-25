@@ -152,7 +152,7 @@ module.exports = {
         icon: 'img/icons/android-icon-72x72.png'
       }
 
-      const n = new Notification('Bienvenida', opt);
+      ServiceWorkerRegistration.showNotification('Bienvenida', opt);
     }
   }
 }
